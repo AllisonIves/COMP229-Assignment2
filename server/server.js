@@ -5,14 +5,13 @@ const mongoose = require('mongoose');
 
 dotenv.config();
 
-//const projectRoutes = require('./routes/project');
-//const userRoutes = require('./routes/user');
+const productRoutes = require('./routes/product');
 
-//mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb+srv://aives1:dcrC82015@cluster0.i9vcrk3.mongodb.net/Marketplace');
 
-//const db = mongoose.connection;
-//db.on('error', (error) => console.error(error));
-//db.once('open', () => console.log('Connected to Mongo DB'));
+const db = mongoose.connection;
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log('Connected to Mongo DB'));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,12 +19,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-//app.use('/api/projects', projectRoutes );
-//app.use('/api/users', userRoutes );
+app.use('/api/product', productRoutes );
 
-app.get((req, res) =>{
-    res.json({message: "Welcome to DressStore Application."})
-})
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
